@@ -14,7 +14,9 @@ func Encode96bit(source string) (string, int, error) {
 	if str_len < 1 || str_len > 14 {
 		return "", -1, errors.New("lenght is error")
 	} else if str_len < 8 {
-		target = fmt.Sprintf("%d%s", str_len, source)
+		target = fmt.Sprintf("%d%7s", str_len, source)
+        byteArray := []byte(target)
+		target = fmt.Sprintf("%x%x%x%x%x%x%x%x", byteArray[0], byteArray[1],byteArray[2],byteArray[3],byteArray[4],byteArray[5],byteArray[6],byteArray[7])
 		return target, str_len, nil
 	} else {
 		ii, e := strconv.Atoi(source[4 : len(source)-1])
